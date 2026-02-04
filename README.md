@@ -26,29 +26,41 @@ Pocket Brain v1 is scoped as a personal, single-user tool. Design decisions prio
 ```mermaid
 flowchart TB
     subgraph clients["CLIENT LAYER"]
-        WebUI["Web UI<br/><small>HTML/JS</small>"]
-        CLI["CLI<br/><small>Terminal Client</small>"]
+        WebUI["Web UI"]
+        CLI["CLI"]
     end
     
-    subgraph host["HOST SYSTEM (Local)"]
-        API["Local API Gateway<br/><small>/chat, /reset, /save</small>"]
-        Backend["Backend Orchestrator<br/><small>• Mode Selection & Templates<br/>• Constraints (Context/Output Cap)<br/>• Session State & Truncation</small>"]
-        Engine["Inference Engine<br/><small>Quantized / CPU-Only</small>"]
-        Storage[("Local Persistence<br/><small>Transcripts<br/>Session Metadata<br/>Model Artifacts</small>")]
+    subgraph host["HOST SYSTEM"]
+        API["Local API<br/>Gateway"]
+        Backend["Backend<br/>Orchestrator"]
+        Engine["Inference<br/>Engine"]
+        Storage[("Local<br/>Storage")]
     end
     
-    WebUI --> API
-    CLI --> API
-    API --> Backend
-    Backend -->|Formatted Prompt| Engine
-    Engine -->|Generated Tokens| Backend
-    Backend -->|Auto-save| Storage
-    Storage -.->|Load Model| Engine
+    WebUI -->|HTTP| API
+    CLI -->|HTTP| API
+    API -->|JSON| Backend
+    Backend -->|Prompt| Engine
+    Engine -->|Tokens| Backend
+    Backend -->|Save| Storage
+    Storage -.->|Load| Engine
     
-    style clients fill:#e3f2fd
-    style host fill:#f5f5f5
-    style Storage fill:#e0e0e0
+    style clients fill:#f8f9fa,stroke:#6c757d,stroke-width:2px
+    style host fill:#f8f9fa,stroke:#6c757d,stroke-width:2px
+    style WebUI fill:#e9ecef,stroke:#495057,stroke-width:2px
+    style CLI fill:#e9ecef,stroke:#495057,stroke-width:2px
+    style API fill:#dee2e6,stroke:#495057,stroke-width:2px
+    style Backend fill:#dee2e6,stroke:#495057,stroke-width:2px
+    style Engine fill:#dee2e6,stroke:#495057,stroke-width:2px
+    style Storage fill:#ced4da,stroke:#495057,stroke-width:2px
 ```
+
+**Components:**
+- **Clients**: Web UI (HTML/JS) and CLI provide user interfaces
+- **API Gateway**: Exposes `/chat`, `/reset`, `/save` endpoints  
+- **Backend Orchestrator**: Enforces modes, context caps, session state, and truncation policies
+- **Inference Engine**: Quantized CPU-only model execution
+- **Local Storage**: Persists transcripts, session metadata, and model artifacts
 
 **Architecture separates orchestration policy from raw inference.** Clients are thin; all core logic lives server-side in the orchestrator layer.
 
