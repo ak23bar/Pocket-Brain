@@ -45,14 +45,14 @@ flowchart TB
     Backend -->|Save| Storage
     Storage -.->|Load| Engine
     
-    style clients fill:#f8f9fa,stroke:#6c757d,stroke-width:2px
-    style host fill:#f8f9fa,stroke:#6c757d,stroke-width:2px
-    style WebUI fill:#e9ecef,stroke:#495057,stroke-width:2px
-    style CLI fill:#e9ecef,stroke:#495057,stroke-width:2px
-    style API fill:#dee2e6,stroke:#495057,stroke-width:2px
-    style Backend fill:#dee2e6,stroke:#495057,stroke-width:2px
-    style Engine fill:#dee2e6,stroke:#495057,stroke-width:2px
-    style Storage fill:#ced4da,stroke:#495057,stroke-width:2px
+    style clients fill:#f8f9fa,stroke:#6c757d,stroke-width:2px,color:#000
+    style host fill:#f8f9fa,stroke:#6c757d,stroke-width:2px,color:#000
+    style WebUI fill:#e9ecef,stroke:#495057,stroke-width:2px,color:#000
+    style CLI fill:#e9ecef,stroke:#495057,stroke-width:2px,color:#000
+    style API fill:#dee2e6,stroke:#495057,stroke-width:2px,color:#000
+    style Backend fill:#dee2e6,stroke:#495057,stroke-width:2px,color:#000
+    style Engine fill:#dee2e6,stroke:#495057,stroke-width:2px,color:#000
+    style Storage fill:#ced4da,stroke:#495057,stroke-width:2px,color:#000
 ```
 
 **Components:**
